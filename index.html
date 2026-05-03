@@ -14,20 +14,17 @@ body{
     text-align:center;
 }
 
-/* Container */
 .container{
     padding:30px 15px;
     max-width:900px;
     margin:auto;
 }
 
-/* Title */
 h1{
     font-size:32px;
     margin-bottom:20px;
 }
 
-/* Heart */
 .heart{
     font-size:50px;
     animation:beat 1s infinite;
@@ -39,7 +36,6 @@ h1{
     100%{transform:scale(1)}
 }
 
-/* Card */
 .card{
     background:rgba(255,255,255,0.2);
     padding:20px;
@@ -50,7 +46,6 @@ h1{
     line-height:1.7;
 }
 
-/* Gallery */
 .gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
@@ -70,21 +65,36 @@ h1{
     transform:scale(1.1);
 }
 
-/* Time */
 .time{
     margin-top:25px;
     font-size:18px;
     font-weight:bold;
 }
 
-/* Mobile */
-@media(max-width:600px){
-    h1{font-size:24px}
+/* 🎵 Nút nhạc */
+.music-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:white;
+    color:black;
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
 }
 </style>
 </head>
 
 <body>
+
+<!-- 🎵 NHẠC -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="playMusic()">🎵 Nhạc</button>
 
 <div class="container">
 
@@ -93,26 +103,11 @@ h1{
 
 <div class="card">
 <p>
-Ngày 15/04/2021, chúng mình bắt đầu bằng những tin nhắn rất giản dị. Không có kế hoạch cho tương lai, không ai nghĩ xa hơn vài câu trả lời tiếp theo. Chỉ là hai người xa lạ, vô tình bước vào cuộc sống của nhau bằng những lời hỏi han rất nhỏ. Vậy mà chính sự bình thường ấy lại khiến cả hai chẳng nỡ rời đi.
-<br><br>
-Có những ngày nhắn tin rất nhiều, cũng có những ngày chỉ kịp gửi cho nhau đúng một câu. Nhưng lạ là, dù nói ít hay nhiều, thì sự hiện diện của người kia vẫn ở đó – âm thầm, nhẹ nhàng nhưng đủ để cảm thấy không cô đơn.
-<br><br>
-Đến 09/05/2021, tụi mình đồng ý quen nhau. Không phải vì mọi thứ đã chắc chắn, mà vì không muốn bỏ lỡ nhau.
-<br><br>
-5 năm trôi qua, có vui, có buồn, có giận hờn… nhưng sau cùng vẫn chọn ở lại.
-<br><br>
-Đặc biệt là 06/09/2024 – ngày em sang Hàn Quốc. Từ đó, tình yêu phải đi qua khoảng cách.
-<br><br>
-Yêu xa là nhớ, là cố gắng, là chờ đợi… nhưng cũng là minh chứng rõ nhất cho tình yêu này.
-<br><br>
-5 năm – không chỉ là thời gian, mà là sự lựa chọn không rời đi 💖
+(HIỂN THỊ NỘI DUNG CỦA BẠN Ở ĐÂY — giữ nguyên đoạn dài bạn đã viết)
 </p>
 </div>
 
-<!-- 📸 GALLERY -->
 <div class="gallery">
-
-<!-- 👉 thay bằng ảnh của bạn -->
 <img src="img1.jpg">
 <img src="img2.jpg">
 <img src="img3.jpg">
@@ -133,7 +128,6 @@ Yêu xa là nhớ, là cố gắng, là chờ đợi… nhưng cũng là minh ch
 <img src="img18.jpg">
 <img src="img19.jpg">
 <img src="img20.jpg">
-
 </div>
 
 <div class="time" id="loveTime"></div>
@@ -141,7 +135,7 @@ Yêu xa là nhớ, là cố gắng, là chờ đợi… nhưng cũng là minh ch
 </div>
 
 <script>
-const startDate = new Date("2021-05-05");
+const startDate = new Date("2021-05-09");
 
 function updateTime(){
     const now = new Date();
@@ -159,6 +153,16 @@ function updateTime(){
 
 setInterval(updateTime,1000);
 updateTime();
+
+/* 🎵 PLAY NHẠC */
+function playMusic(){
+    document.getElementById("bgMusic").play();
+}
+
+/* 🎵 Auto phát khi click lần đầu */
+document.body.addEventListener("click", function(){
+    document.getElementById("bgMusic").play();
+}, { once: true });
 </script>
 
 </body>

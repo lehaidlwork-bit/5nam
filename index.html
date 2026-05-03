@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kỷ niệm 5 năm 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    text-align:center;
+    color:#fff;
+}
+
+.container{
+    padding:50px 20px;
+}
+
+h1{
+    font-size:40px;
+}
+
+.heart{
+    font-size:60px;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.2)}
+    100%{transform:scale(1)}
+}
+
+.message{
+    margin-top:30px;
+    font-size:20px;
+    line-height:1.6;
+}
+
+.time{
+    margin-top:30px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.card{
+    background:rgba(255,255,255,0.2);
+    padding:20px;
+    border-radius:15px;
+    margin-top:30px;
+    backdrop-filter: blur(10px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="heart">❤️</div>
+    <h1>Kỷ niệm 5 năm bên nhau</h1>
+
+    <div class="card">
+        <p class="message">
+            5 năm không phải là khoảng thời gian quá dài,<br>
+            nhưng đủ để chúng ta cùng nhau trải qua rất nhiều điều.<br><br>
+
+            Cảm ơn em vì đã luôn ở bên anh,<br>
+            cùng anh vượt qua những ngày khó khăn,<br>
+            và tạo nên những kỷ niệm đẹp nhất 💖<br><br>
+
+            Mong rằng chúng ta sẽ còn nhiều năm nữa bên nhau...
+        </p>
+    </div>
+
+    <div class="time" id="loveTime"></div>
+</div>
+
+<script>
+// 👉 sửa ngày bắt đầu yêu ở đây
+const startDate = new Date("2021-05-09");
+
+function updateTime(){
+    const now = new Date();
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("loveTime").innerHTML =
+        "Đã bên nhau: " + days + " ngày " +
+        hours + " giờ " +
+        minutes + " phút " +
+        seconds + " giây 💕";
+}
+
+setInterval(updateTime,1000);
+updateTime();
+</script>
+
+</body>
+</html>

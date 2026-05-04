@@ -8,10 +8,11 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
     color:#fff;
     text-align:center;
+    overflow-x:hidden;
 }
 
 .container{
@@ -20,67 +21,100 @@ body{
     margin:auto;
 }
 
-h1{
-    font-size:32px;
-    margin-bottom:20px;
-}
+h1{font-size:30px;}
 
 .heart{
     font-size:50px;
     animation:beat 1s infinite;
 }
-
 @keyframes beat{
-    0%{transform:scale(1)}
     50%{transform:scale(1.2)}
-    100%{transform:scale(1)}
 }
 
+/* CARD */
 .card{
     background:rgba(255,255,255,0.2);
     padding:20px;
     border-radius:15px;
     margin-top:20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter:blur(10px);
     text-align:left;
     line-height:1.7;
 }
 
+/* TYPE */
+#typedText{
+    white-space:pre-line;
+    border-right:2px solid white;
+    animation:blink 1s infinite;
+}
+@keyframes blink{
+    50%{border-color:transparent}
+}
+
+/* GALLERY */
 .gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
     gap:10px;
     margin-top:30px;
 }
-
 .gallery img{
     width:100%;
-    border-radius:10px;
-    object-fit:cover;
     height:120px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
     transition:0.3s;
 }
+.gallery img:hover{transform:scale(1.1)}
 
-.gallery img:hover{
-    transform:scale(1.1);
+/* LIGHTBOX */
+.lightbox{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+}
+
+/* HEART FLOAT */
+.floating-heart{
+    position:fixed;
+    bottom:-10px;
+    animation:floatUp 5s linear infinite;
+}
+@keyframes floatUp{
+    to{transform:translateY(-100vh);}
+}
+
+/* SNOW */
+.snow{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+.snow span{
+    position:absolute;
+    width:5px;height:5px;
+    background:white;
+    border-radius:50%;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(100vh);}
 }
 
 .time{
     margin-top:25px;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.music-btn{
-    position:fixed;
-    top:20px;
-    right:20px;
-    background:white;
-    color:black;
-    padding:10px 15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
     font-weight:bold;
 }
 </style>
@@ -88,36 +122,18 @@ h1{
 
 <body>
 
-<!-- 🎵 NHẠC -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" autoplay loop muted>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music-btn" onclick="playMusic()">🎵 Nhạc</button>
+<div class="snow" id="snow"></div>
 
 <div class="container">
-
 <div class="heart">❤️</div>
 <h1>Hành trình 5 năm – một tình yêu học cách ở lại</h1>
 
 <div class="card">
-<p>
-Ngày 15/04/2021, chúng mình bắt đầu bằng những tin nhắn rất giản dị. Không có kế hoạch cho tương lai, không ai nghĩ xa hơn vài câu trả lời tiếp theo. Chỉ là hai người xa lạ, vô tình bước vào cuộc sống của nhau bằng những lời hỏi han rất nhỏ. Vậy mà chính sự bình thường ấy lại khiến cả hai chẳng nỡ rời đi.
-<br><br>
-Có những ngày nhắn tin rất nhiều, cũng có những ngày chỉ kịp gửi cho nhau đúng một câu. Nhưng lạ là, dù nói ít hay nhiều, thì sự hiện diện của người kia vẫn ở đó – âm thầm, nhẹ nhàng nhưng đủ để cảm thấy không cô đơn.
-<br><br>
-Đến 09/05/2021, tụi mình đồng ý quen nhau. Không phải vì mọi thứ đã chắc chắn, mà vì không muốn bỏ lỡ nhau. Đó là một quyết định rất đỗi nhẹ nhàng, nhưng cũng đầy can đảm.
-<br><br>
-5 năm trôi qua, tình yêu không chỉ toàn là những khoảnh khắc hạnh phúc. Có những ngày rất vui, nhưng cũng có những ngày mệt mỏi, giận hờn và im lặng. Nhưng rồi sau cùng, cả hai vẫn chọn ở lại.
-<br><br>
-Đặc biệt là 06/09/2024 – ngày em sang Hàn Quốc. Từ đó, tình yêu phải đi qua khoảng cách.
-<br><br>
-Yêu xa không chỉ là nhớ, mà còn là rất nhiều lần cố gắng. Khoảng cách khiến mọi thứ khó hơn, nhưng cũng làm tình yêu này rõ ràng hơn.
-<br><br>
-5 năm – là từng tin nhắn nhỏ, từng lần giận rồi lại thương, từng khoảnh khắc gần và những ngày rất xa. Là học cách yêu một người không chỉ khi mọi thứ bình yên, mà cả khi cuộc sống buộc phải chia hai con đường khác nhau trong một thời gian.
-<br><br>
-Từ 15/04/2021, 09/05/2021, đến 06/09/2024 – không chỉ là những cột mốc, mà là minh chứng cho một tình yêu trưởng thành từ kiên nhẫn, từ chờ đợi, và từ lựa chọn không rời đi dù có khó khăn đến đâu 💖
-</p>
+<p id="typedText"></p>
 </div>
 
 <div class="gallery">
@@ -127,53 +143,98 @@ Từ 15/04/2021, 09/05/2021, đến 06/09/2024 – không chỉ là những cộ
 <img src="img4.jpg">
 <img src="img5.jpg">
 <img src="img6.jpg">
-<img src="img7.jpg">
-<img src="img8.jpg">
-<img src="img9.jpg">
-<img src="img10.jpg">
-<img src="img11.jpg">
-<img src="img12.jpg">
-<img src="img13.jpg">
-<img src="img14.jpg">
-<img src="img15.jpg">
-<img src="img16.jpg">
-<img src="img17.jpg">
-<img src="img18.jpg">
-<img src="img19.jpg">
-<img src="img20.jpg">
 </div>
 
 <div class="time" id="loveTime"></div>
-
 </div>
 
 <script>
-const startDate = new Date("2021-05-09");
+// 🎵 AUTOPLAY FIX
+document.addEventListener("click", ()=>{
+    const m=document.getElementById("bgMusic");
+    m.muted=false;
+    m.play();
+},{once:true});
 
-function updateTime(){
-    const now = new Date();
-    const diff = now - startDate;
+// 💌 TYPEWRITER FULL
+const paragraphs = [
+`Ngày 15/04/2021, chúng mình bắt đầu bằng những tin nhắn rất giản dị. Không có kế hoạch cho tương lai, không ai nghĩ xa hơn vài câu trả lời tiếp theo. Chỉ là hai người xa lạ, vô tình bước vào cuộc sống của nhau bằng những lời hỏi han rất nhỏ. Vậy mà chính sự bình thường ấy lại khiến cả hai chẳng nỡ rời đi.`,
 
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff / (1000*60*60)) % 24);
-    const minutes = Math.floor((diff / (1000*60)) % 60);
+`Có những ngày nhắn tin rất nhiều, cũng có những ngày chỉ kịp gửi cho nhau đúng một câu. Nhưng lạ là, dù nói ít hay nhiều, thì sự hiện diện của người kia vẫn ở đó – âm thầm, nhẹ nhàng nhưng đủ để cảm thấy không cô đơn.`,
 
-    document.getElementById("loveTime").innerHTML =
-        "Đã bên nhau: " + days + " ngày " +
-        hours + " giờ " +
-        minutes + " phút 💕";
+`Đến 09/05/2021, tụi mình đồng ý quen nhau. Không phải vì mọi thứ đã chắc chắn, mà vì không muốn bỏ lỡ nhau. Đó là một quyết định rất đỗi nhẹ nhàng, nhưng cũng đầy can đảm.`,
+
+`5 năm trôi qua, tình yêu không chỉ toàn là những khoảnh khắc hạnh phúc. Có những ngày rất vui, nhưng cũng có những ngày mệt mỏi, giận hờn và im lặng. Nhưng rồi sau cùng, cả hai vẫn chọn ở lại.`,
+
+`Đặc biệt là 06/09/2024 – ngày em sang Hàn Quốc. Từ đó, tình yêu phải đi qua khoảng cách.`,
+
+`Yêu xa không chỉ là nhớ, mà còn là rất nhiều lần cố gắng. Khoảng cách khiến mọi thứ khó hơn, nhưng cũng làm tình yêu này rõ ràng hơn.`,
+
+`5 năm – là từng tin nhắn nhỏ, từng lần giận rồi lại thương, từng khoảnh khắc gần và những ngày rất xa. Là học cách yêu một người không chỉ khi mọi thứ bình yên, mà cả khi cuộc sống buộc phải chia hai con đường khác nhau trong một thời gian.`,
+
+`Từ 15/04/2021, 09/05/2021, đến 06/09/2024 – không chỉ là những cột mốc, mà là minh chứng cho một tình yêu trưởng thành từ kiên nhẫn, từ chờ đợi, và từ lựa chọn không rời đi dù có khó khăn đến đâu 💖`
+];
+
+let p=0,c=0;
+const speed=30;
+const pause=1500;
+
+function type(){
+    if(p>=paragraphs.length) return;
+    let text=paragraphs[p];
+    let el=document.getElementById("typedText");
+
+    if(c<text.length){
+        el.innerHTML+=text.charAt(c);
+        c++;
+        setTimeout(type,speed);
+    }else{
+        el.innerHTML+="<br><br>";
+        p++; c=0;
+        setTimeout(type,pause);
+    }
+}
+type();
+
+// 💖 HEART
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="floating-heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},400);
+
+// ❄️ SNOW
+const snow=document.getElementById("snow");
+for(let i=0;i<50;i++){
+    let s=document.createElement("span");
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(3+Math.random()*5)+"s";
+    snow.appendChild(s);
 }
 
-setInterval(updateTime,1000);
-updateTime();
+// 🔍 ZOOM
+document.querySelectorAll(".gallery img").forEach(img=>{
+    img.onclick=()=>{
+        let box=document.createElement("div");
+        box.className="lightbox";
+        box.innerHTML=`<img src="${img.src}">`;
+        box.onclick=()=>box.remove();
+        document.body.appendChild(box);
+    }
+});
 
-function playMusic(){
-    document.getElementById("bgMusic").play();
-}
-
-document.body.addEventListener("click", function(){
-    document.getElementById("bgMusic").play();
-}, { once: true });
+// ⏱ TIME
+const start=new Date("2021-05-09");
+setInterval(()=>{
+    let now=new Date();
+    let diff=now-start;
+    let d=Math.floor(diff/86400000);
+    document.getElementById("loveTime").innerHTML=
+    "Đã bên nhau: "+d+" ngày 💕";
+},1000);
 </script>
 
 </body>

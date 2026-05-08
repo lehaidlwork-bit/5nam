@@ -64,7 +64,27 @@ body::before{
     from{opacity:0.6}
     to{opacity:1}
 }
+/* 💖 background floating icons */
+.bg-heart{
+    position:fixed;
+    font-size:20px;
+    color:rgba(255,255,255,0.15);
+    pointer-events:none;
+    animation:floatBg linear infinite;
+    z-index:0;
+}
 
+@keyframes floatBg{
+    from{
+        transform:translateY(100vh) scale(0.8);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    to{
+        transform:translateY(-10vh) scale(1.2);
+        opacity:0;
+    }
+}
 .gallery{
     display:grid;
     grid-template-columns:repeat(5,120px);
@@ -360,7 +380,25 @@ box.onclick=()=>box.remove();
 document.body.appendChild(box);
 }
 });
+// 💖 floating background hearts
+setInterval(()=>{
+    let bg=document.createElement("div");
+    bg.className="bg-heart";
 
+    const icons=["💖","🤍","✨","💕"];
+    bg.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+    bg.style.left=Math.random()*100+"vw";
+    bg.style.animationDuration=(10+Math.random()*10)+"s";
+    bg.style.fontSize=(15+Math.random()*25)+"px";
+
+    document.body.appendChild(bg);
+
+    setTimeout(()=>{
+        bg.remove();
+    },20000);
+
+},800);
 // đếm ngày
 const start=new Date("2021-05-09");
 setInterval(()=>{
